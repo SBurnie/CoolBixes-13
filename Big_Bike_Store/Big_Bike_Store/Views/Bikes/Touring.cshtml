@@ -1,0 +1,16 @@
+﻿
+@model IEnumerable<Big_Bike_Store.Models.BikeList>
+@{
+    ViewData["Title"] = "Touring Bikes";
+}
+
+<h1>Touring Bike Model List</h1>
+
+@foreach (var item in Model)
+{
+<div style="background-color:black; border-bottom-left-radius:5px; border-bottom-right-radius:5px; border-top-left-radius:5px; border-top-right-radius:5px; opacity:1.0">
+    @Html.ActionLink(item.ProductModel, "Details", new { id = item.ProductModelId })
+    <p style="background-color:white">@item.Description</p>
+</div>
+}
+
