@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Big_Bike_Store.Models;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace Big_Bike_Store
@@ -40,12 +42,18 @@ namespace Big_Bike_Store
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Bikes/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "Image")),
+                RequestPath = "/Image"
+            });
 
             app.UseRouting();
 
@@ -55,7 +63,7 @@ namespace Big_Bike_Store
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Bikes}/{action=Home}/{id?}");
             });
         }
     }

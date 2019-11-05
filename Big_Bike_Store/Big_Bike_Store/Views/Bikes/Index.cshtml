@@ -4,17 +4,80 @@
     ViewData["Title"] = "Bike Categories";
 }
 
-<h1>Bike Categories</h1>
-<h4>Here are our current list of categories</h4>
+<html>
 
-<table class="table">
-    <tbody>
-@foreach (var item in Model) {
+<head>
+
+    <style type="text/css">
+
+        a.mountain {
+            background: url("Image/MountainBikes1.jpg");
+            display: block;
+            background-size: 350px 200px;
+            height: 200px;
+            width: 350px;
+            text-indent: -9999px; /* hides the link text */
+        }
+
+        a.road {
+            background: url("Image/RoadBikes1.jpg");
+            display: block;
+            background-size: 350px 200px;
+            height: 200px;
+            width: 350px;
+            text-indent: -9999px; /* hides the link text */
+        }
+
+        a.touring {
+            background: url("Image/TouringBikes1.jpg");
+            display: block;
+            background-size: 350px 200px;
+            height: 200px;
+            width: 350px;
+            text-indent: -9999px; /* hides the link text */
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>All of our Types of Bikes for Sale</h1>
+
+    <p>Great selection of Road, Mountain and Touring bikes for men, women and children! Buy online and get your bike in store or delivery</p>
+
+    <table class="table">
+
         <tr>
-            <td>
-                @Html.ActionLink(item.Name, item.Name.Substring(0, item.Name.IndexOf(" ")))
-            </td>
+            @foreach (var item in Model)
+            {
+
+                <td style="background-color:gray; padding:20px">
+
+                    @if (item.Name == "Mountain Bikes")
+                    {
+                        @Html.ActionLink(item.Name, item.Name.Substring(0, item.Name.IndexOf(" ")));
+                        @Html.ActionLink(item.Name, item.Name.Substring(0, item.Name.IndexOf(" ")), "Bikes", null, null, null, null, new { @class = "mountain" })
+                        <p>Mountain bikes, are bicycles designed for off-road cycling. Mountain bikes share similarities with other bicycles, but incorporate features designed to enhance durability and performance in rough terrain.</p>
+                    }
+                    @if (item.Name == "Road Bikes")
+                    {
+                        @Html.ActionLink(item.Name, item.Name.Substring(0, item.Name.IndexOf(" ")));
+                        @Html.ActionLink(item.Name, item.Name.Substring(0, item.Name.IndexOf(" ")), "Bikes", null, null, null, null, new { @class = "road" })
+                        <p>Road bikes are speed machines, bicycles designed to take you as far and as fast as your legs can manage. The road bike gets its name from the terrain it is designed to be used on.</p>
+                    }
+                    @if (item.Name == "Touring Bikes")
+                    {
+                        @Html.ActionLink(item.Name, item.Name.Substring(0, item.Name.IndexOf(" ")));
+                        @Html.ActionLink(item.Name, item.Name.Substring(0, item.Name.IndexOf(" ")), "Bikes", null, null, null, null, new { @class = "touring" })
+                        <p>Touring bikes, are bicycles designed or modified to handle bicycle touring. To make the bikes sufficiently robust, comfortable and capable of carrying heavy loads, special features may include a long wheelbase, frame materials that favor flexibility over rigidity, heavy duty wheels, and multiple mounting points.</p>
+
+                    }
+
+                </td>
+
+            }
+
         </tr>
-}
-    </tbody>
-</table>
+    </table>
+</body>
+</html>
