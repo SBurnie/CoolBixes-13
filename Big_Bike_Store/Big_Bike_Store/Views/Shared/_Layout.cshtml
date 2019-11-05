@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/logo.jpg" height="50px" /> Big Bike Store</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Bikes" asp-action="Home"><img src="~/logo.jpg" height="50px" /> Cool Bixes</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,15 +19,32 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bikes" asp-action="Home">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Bikes" asp-action="Index">Bikes</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bikes" asp-action="Return">Return</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bikes" asp-action="Careers">Careers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bikes" asp-action="AboutUs">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bikes" asp-action="ContactUs">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Bikes" asp-action="CyclingSafety">Cycling Safety</a>
+                        </li>
                     </ul>
+                </div>
+                <div>
+                    <form asp-controller="Bikes" asp-action="SearchProduct">
+                        <input type="text" name="search"> <input type="submit" value="Search" />
+                    </form>
                 </div>
             </div>
         </nav>
@@ -40,7 +57,7 @@
 
     <footer class="border-top footer text-muted bg-dark">
         <div class="container">
-            &copy; 2019 - Big_Bike_Store - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - Cool_Bixes - <a asp-area="" asp-controller="Bikes" asp-action="Home">Home</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -39,6 +39,16 @@ namespace Big_Bike_Store.Controllers
 
         }
 
+        public IActionResult CyclingSafety()
+        {
+            return View();
+        }
+
+        public IActionResult Home()
+        {
+            return View();
+        }
+
         public IActionResult Road()
         {
             var validRoadProducts = db.VProductAndDescription
@@ -103,6 +113,44 @@ namespace Big_Bike_Store.Controllers
             }
 
             return View(productCategory);
+        }
+        //search 
+        public IActionResult SearchProduct(string search)
+        {
+            var searchresult= db.Product.Where(b => b.SellEndDate == null); ;
+            if (search != null)
+            {
+                searchresult = searchresult.Where(b => b.Name.Contains(search) ||  b.Color.Contains(search) || b.ProductNumber.Contains(search));
+
+            }
+            if (searchresult == null)
+            {
+                return NotFound();
+            }
+
+            return View("Details",searchresult);
+        }
+
+        // Careers static page
+        public IActionResult Careers()
+        {
+            return View();
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        // Return static page
+        public IActionResult Return()
+        {
+            return View();
         }
 
         // GET: Bikes/Create

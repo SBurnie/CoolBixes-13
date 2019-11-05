@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "ContactUs";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 600px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
+        }
+    </style>
+</head>
+<body>
+    <h1>ContactUs</h1>
+    <!--The div element for the map -->
+    <h3>Zoom in to see our true self</h3>
+    <div id="map"></div>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var store = { lat: -23.468832, lng: 122.789864 };
+            // The map, centered at the store
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 7, center: store });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({ position: store, map: map });
+        }
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAle3fv36i74A5ySDGzC8OtMALHMoYQln0&callback=initMap">
+    </script>
+    <h3>Come and see us, it would be an honor to serve you master</h3>
+</body>
+</html>
