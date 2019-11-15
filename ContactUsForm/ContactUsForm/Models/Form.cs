@@ -11,14 +11,12 @@ namespace ContactUsForm.Models
         public int ID { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
         [Display(Name = "First Name")]
-        [RegularExpression(@"([^!@#$%^&*()_+\-=`~0123456789.\/\\|;<>:])", ErrorMessage = "First Name is Invalid")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage = "First Name is Invalid, No numbers or special characters allowed!")]
         public string FirstName { get; set; } 
 
         [Required]
-        [DataType(DataType.Text)]
-        [RegularExpression(@"([^!@#$%^&*()_+\-=`~0123456789.\/\\|;<>:])", ErrorMessage ="Last Name is Invalid")]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage ="Last Name is Invalid, No numbers or special characters allowed")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
@@ -30,7 +28,7 @@ namespace ContactUsForm.Models
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+/.[A-Z]{2,}$", ErrorMessage = "Email Address is Invalid")]
+        [RegularExpression(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Email Address is Invalid")]
         public string Email { get; set; }
 
         [Required]
