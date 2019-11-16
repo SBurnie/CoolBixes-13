@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using ContactUsForm.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
+using MailKit.Security;
 
 namespace ContactUsForm.Controllers
 {
@@ -21,28 +22,45 @@ namespace ContactUsForm.Controllers
         {
             _context = context;
         }
-        public HomeController(ILogger<HomeController> logger)
+        
+        public IActionResult Privacy()
         {
-            _logger = logger;
+            return View();
         }
 
         public IActionResult Index()
         {
+         
             return View();
         }
 
-        public IActionResult Privacy([Bind("ID, FirstName, LastName, PostalCode, Email, Topic, PhoneNumber, Questions")] Form form)
-        {
-            if(ModelState.IsValid)
-            {
-                
-            }
-            return View();
-        }
-
+       
         public IActionResult Contact()
         {
+           
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Contact([Bind("ID, FirstName, LastName, PostalCode, Email, Topic, PhoneNumber, Questions, TimeStamp")] Form form)
+        {
+            if (ModelState.IsValid)
+            {
+                bool success = SendEmail(form.ID, form.FirstName, form.LastName, form.PostalCode, form.Email, form.Topic, form.PhoneNumber, form.Questions);
+
+                if (success)
+                {
+                    ViewBag.message = "Thank you " + form.FirstName + form.LastName + " your email was sent";
+                    _context.Add(form);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    ViewBag.message = "Error your email has not been sent";
+               
+                }
+            }
             return View();
         }
 
@@ -62,9 +80,11 @@ namespace ContactUsForm.Controllers
                 Text = questions
             };
 
-            using(var client = new SmtpClient())
+            using (var client = new SmtpClient())
             {
-                client.Connect("smtp.gmail.com", 587, false);
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+
+                client.Connect("smtp.gmail.com", 465, SecureSocketOptions.Auto);
                 client.Authenticate("coolbixes420@gmail.com", PASS);
                 client.Send(message);
                 client.Disconnect(true);
@@ -73,6 +93,7 @@ namespace ContactUsForm.Controllers
 
             return success;
         }
+
 
 
 

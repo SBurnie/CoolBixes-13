@@ -42,5 +42,8 @@ namespace ContactUsForm.Models
         [Required]
         [DataType(DataType.MultilineText)]
         public string Questions { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime TimeStamp { get; set; }
     }
 }
